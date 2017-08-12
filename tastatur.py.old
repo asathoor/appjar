@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# file: tastatur.py
+# purpose: a GUI for g810-led
+# by: per thykjaer jensen
+# license: GPLv3
+
+# DEPENDENCIES
+# appjar
+# g810-led: https://github.com/MatMoul/g810-led
+
+from appJar import gui # appjar
+import subprocess as sub # os commands
+import signal
+
+app = gui("G810-led")
+app.addLabel("title", "G810 Led Keyboard")
+app.setLabelBg("title", "orange")
+
+'''
+Button Actions
+'''
+def btnClick( btn ):
+    if btn == "All":
+        color = app.getEntry("hex")
+        setKbd = sub.call( [ "g810-led", "-a", color ] )
+    elif btn == "Key":
+        color = app.getEntry("hex")
+        key = app.getEntry("key")
+        setKbd = sub.call( [ "g810-led", "-k", key, color ] )
+    elif btn == "Keygroup":
+        color = app.getEntry("hex")
+        key = app.getEntry("key")
+        setKbd = sub.call( [ "g810-led", "-g", key, color ] )
+    elif btn == "Cancel":
+        app.stop()
+        
+'''
+Button Panel
+'''
+app.addLabel("color","Type color HEX")
+app.addLabelEntry("hex")
+app.addLabel("keyName")
+app.addLabel("kgrpork","Add a keygroup or a key")
+app.addLabelEntry("key")
+app.addButtons(["All","Key","Keygroup","Cancel"],btnClick)
+
+app.go() # loop

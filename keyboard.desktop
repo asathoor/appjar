@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=G810-led
+Version=1.0
+Exec=/home/per/bin/appjar/tastatur.py
+Comment=Set keyboard colors
+Icon=keyboard.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Programs
+
